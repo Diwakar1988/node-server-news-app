@@ -11,50 +11,38 @@ module.exports = {
 };
 
 function login(req, res, next) {
-
+    const body = req.body;
+    const user = userService.login(body);
+    if (user) {
+        res.send(user);
+    } else {
+        res.status(404).json({ message: 'User not found' });
+    }
 }
-function logout(req, res, next) {
 
-}
 function createUser(req, res, next) {
     const body = req.body;
-    userService.createUser(body)
-    .then(user => {
-        res.send(user);
-    })
-    .catch(err=>{
-        res.send(err);
-    })
+    const user = userService.createUser(body);
+    res.send(user);
 }
 function getAllUsers(req, res, next) {
-    userService.getAllUsers()
-    .then(users => {
-        res.send(users);
-    })
-    .catch(err=>{
-        res.send(err);
-    })
+    const user = req.user;
+    if (user.isAdmin){
+        const users = userService.getAllUsers();
+        res.send(users);    
+    } else {
+        res.status(401).json({ message: 'Admin access needed' });
+    }
 }
 function getUser(req, res, next) {
-    const id = req.params.id;
-    userService.getUser(id)
-    .then(user => {
-        if(user)
-        {
-            res.send(user);
-        } 
-        else
-        {
-            res.status(404).json({ message: 'User not found' })
-        }
-    })
-    .catch(err=>{
-        res.send(err);
-    })
+    res.send({...req.user, password: undefined, isAdmin: undefined});
 }
 function updateUser(req, res, next) {
 
 }
 function deleteUser(req, res, next) {
+
+}
+function logout(req, res, next) {
 
 }

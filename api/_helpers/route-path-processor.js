@@ -23,4 +23,4 @@ function processDirectories(router,route,dirPath,ignoreFilesDirPath){
     });
 }
 
-module.exports.processRoutePath = processRoutePath;
+module.exports = processRoutePath;

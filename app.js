@@ -5,8 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const jwt = require('./api/_helpers/jwt');
-
+const dotenv = require('dotenv');
+dotenv.config();
 const app = express();
 
 // view engine setup
@@ -21,9 +21,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
-
-// use JWT auth to secure the api
-app.use(jwt());
 
 app.use('/api', require('./api'));
 

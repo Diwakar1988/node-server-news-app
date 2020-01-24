@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {processRoutePath} = require('./_helpers/route-path-precessor'); 
+const processRoutePath = require('../api/_helpers/route-path-processor'); 
 
 processRoutePath(router,__dirname);
 

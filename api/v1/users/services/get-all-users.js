@@ -1,4 +1,4 @@
-const getAllUsers = async () => {
+const getAllUsers = () => {
     return require('../models/users');
 }
 
